@@ -1,23 +1,587 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+    <!-- Schema.org FAQ 구조화 데이터 -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "야간이사는 정확히 몇 시부터 몇 시까지를 의미하나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "일반적으로 저녁 6시 이후부터 밤 12시 이전까지 진행되는 이사를 야간이사라고 합니다. 심야 이사는 자정을 넘겨 새벽까지 진행되는 경우를 포함하며, 업체마다 기준 시간에 약간의 차이가 있을 수 있습니다. 주간 이사보다 인건비가 높게 책정되는 경우가 많습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "야간이사를 하면 비용이 더 비싼가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "네, 맞습니다. 야간이사는 주간 기본 요금 외에 야간 할증 요금이 추가됩니다. 보통 인건비에 20%~50%의 할증이 붙으며, 심야 시간대(자정 이후)로 넘어갈 경우 할증률은 더 높아집니다. 비용 절약을 위해서는 이사 규모와 시간을 정확히 조율하는 것이 중요합니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "야간 이사 시 층간 소음이나 이웃 민원 발생을 방지하는 방법은 무엇인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "이사 전 미리 관리사무소에 야간 이사 일정을 통보하고, 이웃 주민들에게 양해를 구하는 공지문을 부착하는 것이 좋습니다. 이사 당일에는 소음이 발생하는 짐 운반을 최소화하고, 가급적 포장/정리 작업은 주간에 마무리하는 등 세심한 주의가 필요합니다. 특히 공동주택의 경우 관리 규약을 반드시 확인해야 합니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "야간이사는 어떤 경우에 가장 적합한가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "주로 직장인, 학생, 자영업자 등 낮 시간에 이사하기 어려운 경우나, 이사하는 주택의 주차 공간 확보가 어려운 도심 지역에서 유용합니다. 주간 교통 체증을 피할 수 있고, 원하는 시간대에 이사를 완료할 수 있다는 장점이 있습니다."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- 스타일: 부드럽고 다채로운 색, 타이틀 강조, 계층 구조 -->
+    <style>
+      :root {
+        --primary-color: #1a5e7b; /* Deep Blue */
+        --secondary-color: #3f90b0; /* Sky Blue */
+        --accent-color: #fca311; /* Bright Orange for highlight */
+        --highlight-color: #f8fcfd; /* Very Light Blue background */
+        --text-color: #333333;
+        --bg-light: #f5f8fb;
+        --bg-white: #ffffff;
+        --btn-color: #fca311;
+        --btn-hover: #e8950c;
+      }
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+
+      body {
+        font-family: 'Noto Sans KR', sans-serif;
+        margin: 0; padding: 0;
+        background-color: var(--bg-light);
+        color: var(--text-color);
+        line-height: 1.8;
+      }
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+      header {
+        background-color: var(--primary-color);
+        padding: 30px 20px;
+        text-align: center;
+        color: var(--bg-white);
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      }
+      header h1 {
+        margin: 0;
+        font-size: 2.5em;
+        font-weight: 700;
+      }
+      header h1 a {
+        color: var(--bg-white);
+        text-decoration: none;
+      }
+      .hero {
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        color: var(--bg-white);
+        text-align: center;
+        padding: 80px 20px;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100px;
+        background: linear-gradient(to top, var(--bg-light) 0%, transparent 100%);
+      }
+      .hero h1 {
+        font-size: 3.8em;
+        margin-bottom: 20px;
+        font-weight: 900;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+      }
+      .hero p {
+        font-size: 1.5em;
+        margin-bottom: 35px;
+        font-weight: 300;
+      }
+      .cta-btn {
+        background-color: var(--accent-color);
+        color: var(--bg-white);
+        padding: 18px 45px;
+        font-size: 1.3em;
+        font-weight: bold;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+        text-decoration: none;
+        display: inline-block;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      }
+      .cta-btn:hover {
+        background-color: var(--btn-hover);
+        transform: translateY(-3px);
+      }
+      .compare-form-box {
+        background-color: var(--bg-white);
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        margin-top: 40px;
+        text-align: left;
+      }
+      .compare-form-box h2 {
+        color: var(--primary-color);
+        text-align: center;
+        margin-bottom: 25px;
+        font-size: 2.2em;
+        border-bottom: 2px solid var(--accent-color);
+        display: inline-block;
+        padding-bottom: 5px;
+      }
+      .compare-form-box label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: var(--text-color);
+        font-size: 1.1em;
+      }
+      .compare-form-box input, .compare-form-box select {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        box-sizing: border-box;
+        font-size: 1em;
+      }
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+      }
+      .form-full {
+        grid-column: 1 / -1;
+      }
+
+      .content-section {
+        margin-top: 40px;
+        background-color: var(--bg-white);
+        padding: 60px 0;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        border: 1px solid #e0e0e0;
+      }
+      .content-section h2 {
+        font-size: 2.8em;
+        color: var(--primary-color);
+        margin-bottom: 30px;
+        font-weight: 700;
+        text-align: center;
+      }
+      .content-section h3 {
+        font-size: 1.8em;
+        color: var(--secondary-color);
+        margin-top: 30px;
+        margin-bottom: 15px;
+        border-left: 5px solid var(--accent-color);
+        padding-left: 15px;
+      }
+      .feature-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-top: 30px;
+      }
+      .feature-grid .item {
+        width: calc(33.33% - 20px);
+        margin: 10px;
+        padding: 25px;
+        background-color: var(--highlight-color);
+        border-radius: 8px;
+        text-align: center;
+        transition: transform 0.3s, box-shadow 0.3s;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      }
+      .feature-grid .item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+      }
+      .feature-grid .item img {
+        width: 60px; height: 60px;
+        margin-bottom: 15px;
+      }
+      .keyword-list {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 30px;
+      }
+      .keyword-list li {
+        background-color: var(--secondary-color);
+        color: var(--bg-white);
+        padding: 10px 20px;
+        margin: 5px;
+        border-radius: 20px;
+        font-weight: 500;
+        transition: background-color 0.3s;
+      }
+      .keyword-list li:hover {
+        background-color: var(--primary-color);
+      }
+      .faq-item {
+        border-bottom: 1px solid #eee;
+        padding: 20px 0;
+      }
+      .faq-item h3 {
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 1.4em;
+        color: var(--primary-color);
+        border-left: none;
+        padding-left: 0;
+        margin-top: 0;
+      }
+      .faq-item h3::after {
+        content: '+';
+        font-size: 1.5em;
+        color: var(--accent-color);
+        transition: transform 0.3s;
+      }
+      .faq-item.active h3::after {
+        content: '-';
+        transform: rotate(180deg);
+      }
+      .faq-item p {
+        display: none;
+        padding-top: 10px;
+        color: #555;
+        font-size: 1.1em;
+        line-height: 1.7;
+      }
+      .faq-item.active p {
+        display: block;
+      }
+      footer {
+        background-color: var(--primary-color);
+        color: var(--bg-white);
+        text-align: center;
+        padding: 40px 20px;
+        font-size: 0.9em;
+        margin-top: 50px;
+      }
+      footer a {
+        color: var(--bg-white);
+        text-decoration: none;
+        margin: 0 10px;
+      }
+      footer a:hover {
+        text-decoration: underline;
+      }
+
+      /* Data Visualization Styling */
+      .data-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 30px;
+        text-align: center;
+        font-size: 1em;
+      }
+      .data-table th, .data-table td {
+        border: 1px solid #ddd;
+        padding: 12px;
+      }
+      .data-table th {
+        background-color: var(--primary-color);
+        color: var(--bg-white);
+        font-weight: bold;
+      }
+      .data-table tr:nth-child(even) {
+        background-color: var(--highlight-color);
+      }
+      .graph-container {
+        width: 100%;
+        height: 300px; /* Adjust height based on complexity */
+        background-color: #fcfcfc;
+        border: 1px solid #eee;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+      }
+      .graph-bar {
+        background-color: var(--accent-color);
+        width: 100%;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 900px) {
+        .feature-grid .item { width: calc(50% - 20px); }
+        .hero h1 { font-size: 3em; }
+        .hero p { font-size: 1.3em; }
+        .content-section h2 { font-size: 2.4em; }
+      }
+      @media (max-width: 600px) {
+        .feature-grid .item { width: 100%; margin: 10px 0; }
+        .hero h1 { font-size: 2.2em; }
+        .hero p { font-size: 1.1em; }
+        .content-section h2 { font-size: 2em; }
+        .form-grid { grid-template-columns: 1fr; }
+        .compare-form-box { padding: 25px; }
+      }
+    </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1><a href="/">야간이사 전문가이드</a></h1>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>야간이사, 현명하게 선택하고 안전하게 마무리하기</h1>
+        <p>복잡한 주간 이사를 피하고 싶으신가요? 심야 시간 이사의 장점과 단점, 비용, 그리고 성공 전략을 모두 알려드립니다.</p>
+        <div class="compare-form-box">
+          <h2>맞춤형 야간이사 무료 견적 요청</h2>
+          <p>간단한 정보 입력으로 전국 야간이사 전문업체들의 견적을 실시간으로 비교해보세요. 2026년 최신 데이터 반영!</p>
+          <form action="#" method="post">
+            <div class="form-grid">
+              <div>
+                <label for="name">이름</label>
+                <input type="text" id="name" name="name" placeholder="이름을 입력하세요" required>
+              </div>
+              <div>
+                <label for="phone">연락처</label>
+                <input type="tel" id="phone" name="phone" placeholder="휴대폰 번호를 입력하세요" required>
+              </div>
+              <div>
+                <label for="from">출발지 (예: 서울 강남구)</label>
+                <input type="text" id="from" name="from" placeholder="출발지 주소 또는 지역명" required>
+              </div>
+              <div>
+                <label for="to">도착지 (예: 경기도 성남시)</label>
+                <input type="text" id="to" name="to" placeholder="도착지 주소 또는 지역명" required>
+              </div>
+              <div>
+                <label for="date">희망 이사 날짜</label>
+                <input type="date" id="date" name="date" required>
+              </div>
+              <div>
+                <label for="time">희망 이사 시간대</label>
+                <select id="time" name="time" required>
+                  <option value="">시간대를 선택하세요</option>
+                  <option value="evening">저녁 (18:00~21:00)</option>
+                  <option value="night">밤 (21:00~24:00)</option>
+                  <option value="midnight">심야 (24:00 이후)</option>
+                </select>
+              </div>
+              <div class="form-full">
+                <label for="comment">추가 요청사항 (야간 작업 시 유의사항 등)</label>
+                <textarea id="comment" name="comment" rows="3" placeholder="엘리베이터 유무, 특수 짐(피아노 등), 이사 시 유의할 점 등을 기재해주세요."></textarea>
+              </div>
+            </div>
+            <button type="submit" class="cta-btn form-full">무료 견적 요청하기</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="container">
+        <h2>왜 야간이사를 선택해야 할까요? 장점과 단점 심층 분석</h2>
+        <p>야간이사는 바쁜 현대인들에게 매력적인 대안이 되고 있습니다. 낮 시간에 직장이나 학업으로 인해 일정을 조정하기 어려운 분들에게 특히 인기가 높습니다. 하지만 주간 이사와는 분명한 차이점이 존재하므로, 장단점을 명확히 파악하고 신중하게 결정해야 합니다.</p>
+
+        <h3>야간이사의 주요 장점 (Pros)</h3>
+        <div class="feature-grid">
+          <div class="item">
+            <img src="https://via.placeholder.com/60/1a5e7b/fff?text=ICON1" alt="시간 절약 아이콘">
+            <h4>시간 절약 및 일정 유연성</h4>
+            <p>직장인의 경우 연차 소진 없이 주간 업무를 정상적으로 처리한 후 퇴근 후 이사를 시작할 수 있습니다. 특히 이사 준비와 마무리를 밤에 진행함으로써 다음 날 아침부터 새로운 환경에서 일상생활을 시작할 수 있습니다.</p>
+          </div>
+          <div class="item">
+            <img src="https://via.placeholder.com/60/1a5e7b/fff?text=ICON2" alt="교통 체증 해소 아이콘">
+            <h4>교통 체증 및 주차 문제 해소</h4>
+            <p>수도권 등 도심 지역에서는 이사 차량이 도로를 점유하거나, 주차 공간 확보가 어려워 이사 시간이 지연되는 경우가 많습니다. 야간에는 교통량이 현저히 줄어들어 이동 시간이 단축되며, 주차장 확보도 비교적 용이합니다.</p>
+          </div>
+          <div class="item">
+            <img src="https://via.placeholder.com/60/1a5e7b/fff?text=ICON3" alt="사생활 보호 아이콘">
+            <h4>사생활 보호 및 프라이버시 유지</h4>
+            <p>주간에 이사할 경우 이삿짐 운반 과정에서 많은 이웃 주민들과 마주칠 수 있습니다. 반면 야간이사는 비교적 조용한 환경에서 사적인 물건을 운반할 수 있어 프라이버시 보호에 유리합니다.</p>
+          </div>
+        </div>
+
+        <h3>야간이사의 주요 단점 (Cons) 및 고려사항</h3>
+        <ul>
+          <li><strong>높은 비용:</strong> 야간 근무로 인한 인건비 할증이 발생합니다.</li>
+          <li><strong>소음 문제:</strong> 공동주택의 경우 소음으로 인한 이웃 민원 발생 가능성이 높습니다.</li>
+          <li><strong>작업 환경:</strong> 조명 부족으로 주간 대비 작업 효율이 떨어질 수 있으며, 짐 파손 위험이 미세하게 증가할 수 있습니다.</li>
+          <li><strong>피로도:</strong> 늦은 시간까지 이사를 진행할 경우 이사 당사자 및 작업자의 피로도가 높습니다.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="container">
+        <h2>2026년 야간이사 비용 분석: 주간 이사와 얼마나 차이날까?</h2>
+        <p>많은 분들이 야간이사를 망설이는 가장 큰 이유는 비용입니다. 야간이사는 주간 기본 요금에 야간 할증(night surcharge)이 추가됩니다. 할증률은 업체마다, 지역마다, 그리고 시간대마다 상이하며 일반적으로 20%~50% 수준에서 책정됩니다. 특히 짐의 양, 이사 거리, 작업 인원 수에 따라 전체 비용이 크게 달라지므로, 사전에 정확한 견적을 받는 것이 중요합니다.</p>
+
+        <h3>야간 할증 요금 산정 기준 (2026년 기준)</h3>
+        <p>야간 할증은 일반적으로 인건비에 적용됩니다. 예를 들어, 5톤 포장이사(남성 3명, 여성 1명) 기준 주간 인건비가 100만 원이라고 가정할 때, 야간 할증 30%가 붙으면 인건비만 130만 원으로 상승합니다. 차량 운임이나 포장재 비용 등은 할증 대상이 아닌 경우가 많습니다. 다음 표는 야간이사의 비용 구조를 주간 이사와 비교한 예시입니다.</p>
+
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>구분</th>
+              <th>주간 이사 (일반)</th>
+              <th>야간 이사 (할증)</th>
+              <th>비고</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>작업 인건비</td>
+              <td>기준 금액</td>
+              <td>기준 금액 + 20%~50% 할증</td>
+              <td>업체별, 시간대별 차등 적용</td>
+            </tr>
+            <tr>
+              <td>차량 운임</td>
+              <td>동일</td>
+              <td>동일</td>
+              <td>주간/야간 동일하게 적용되는 경우가 많음</td>
+            </tr>
+            <tr>
+              <td>포장재 비용</td>
+              <td>동일</td>
+              <td>동일</td>
+              <td>별도 추가 요금 없음</td>
+            </tr>
+            <tr>
+              <td>옵션 서비스 (청소 등)</td>
+              <td>주간 요금</td>
+              <td>주간 요금 + 야간 할증 가능</td>
+              <td>야간 작업 가능한지 확인 필수</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>비용 절감을 위한 팁: 비수기 및 주중 이용</h3>
+        <p>야간이사는 주말(금요일 밤, 토요일 밤)에 수요가 몰려 할증률이 높아집니다. 반면, 월요일부터 목요일 사이의 주중 야간 이사는 상대적으로 할증률이 낮거나 추가 할인 혜택을 제공하는 업체도 있습니다. 이사 날짜가 유연하다면 비수기 주중 야간을 노리는 것이 비용을 아끼는 현명한 방법입니다. 또한 짐의 양을 최소화하고, 가구 분해/조립이 필요한 짐을 사전에 정리하여 작업 시간을 줄이는 것도 비용 절감에 도움이 됩니다.</p>
+
+        <h3 style="margin-top:50px;">함께 많이 찾는 키워드</h3>
+        <ul class="keyword-list">
+          <li>#야간이사견적</li>
+          <li>#심야이사</li>
+          <li>#밤포장이사</li>
+          <li>#주말야간이사</li>
+          <li>#야간이사후기</li>
+          <li>#이사비용할증</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="container">
+        <h2>성공적인 야간이사를 위한 지역별 핵심 전략</h2>
+        <p>대한민국은 지역별로 주거 환경과 이사 문화가 다릅니다. 특히 야간이사는 소음 문제와 이동 거리에 민감하기 때문에 지역 특성을 고려한 준비가 필수입니다. 아래는 주요 도시별 야간이사 시 유의사항입니다.</p>
+
+        <h3>서울 및 수도권 야간이사: 교통 혼잡과 규제</h3>
+        <p>서울, 인천, 수원, 성남, 고양, 용인, 부천 등 수도권 지역은 인구 밀집도가 매우 높습니다. 주간에는 극심한 교통 체증으로 이사 일정이 지연되는 경우가 많아 야간이사의 수요가 높습니다. 그러나 아파트 단지가 밀집한 강남구, 송파구, 분당구 등에서는 야간 작업 시 소음 규제가 엄격합니다. 이사 전 관리사무소에 야간 작업을 신고하고, 이웃에게 사전 양해를 구하는 공지문을 부착해야 합니다. <span style="font-weight: bold;">[참고: 서울시는 2026년부터 공동주택 소음 관련 규정을 더욱 강화할 예정입니다.]</span></p>
+
+        <h3>부산, 대구, 대전 등 광역시 야간이사: 동선 효율화</h3>
+        <p>부산 해운대, 서면 지역이나 대구 수성구, 대전 서구 등 광역시 중심부도 주간 교통량이 많습니다. 야간이사는 이럴 때 효과적인 대안이 될 수 있습니다. 특히 부산이나 인천의 경우 항만 물류 이동이 많아 야간에 대형 트럭 이동이 원활한 장점이 있습니다. 반면, 주택가 밀집 지역에서는 소음 민원에 특히 유의해야 합니다.</p>
+
+        <h3>기타 전국 주요 도시별 고려사항</h3>
+        <p><strong>광주</strong>, <strong>울산</strong>, <strong>세종</strong> 등 신도시 지역에서는 이사 수요가 꾸준히 증가하고 있습니다. 신도시의 아파트들은 대규모 단지로 구성되어 있어 야간 작업 시 관리 규약이 까다로울 수 있습니다. <strong>천안</strong>, <strong>청주</strong>, <strong>전주</strong>, <strong>포항</strong>, <strong>창원</strong> 등 지방 거점 도시에서도 야간 이사 서비스가 활발하게 제공되고 있습니다. <strong>춘천</strong>, <strong>원주</strong>, <strong>평택</strong>, <strong>김해</strong>, <strong>구미</strong>, <strong>제주</strong> 등 전국적으로 야간이사를 진행할 경우, 장거리 이동을 고려하여 업체 선정 시 야간 이동에 따른 추가 요금과 안전 보험 여부를 꼼꼼히 확인해야 합니다. <strong>남양주</strong>, <strong>화성</strong>, <strong>시흥</strong>, <strong>안산</strong>, <strong>파주</strong>, <strong>의정부</strong> 등 경기도 외곽 지역은 상대적으로 야간 작업에 대한 규제가 덜한 편이지만, 도착지 환경을 사전에 점검하는 것이 좋습니다.</p>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="container">
+        <h2>자주 묻는 질문 (FAQ)</h2>
+        <p>야간이사에 대해 고객들이 가장 궁금해하는 질문들을 모아봤습니다. 궁금증을 해결하고 현명한 이사를 준비해보세요.</p>
+
+        <div class="faq-item">
+          <h3>야간이사 시 소음 규제는 어떻게 되나요?</h3>
+          <p>공동주택관리법 시행규칙 및 환경부의 층간소음 기준에 따라, 야간 시간대(오후 10시~오전 6시) 소음 기준은 주간보다 엄격합니다. 이사 시 발생하는 짐 옮기기 소음, 차량 시동 소음 등은 민원 대상이 될 수 있습니다. 야간 이사 전 반드시 관리사무소에 신고하고, 작업자들에게도 조용하게 작업해 줄 것을 요청해야 합니다.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>야간이사는 포장이사만 가능한가요? 원룸이나 용달이사도 가능한가요?</h3>
+          <p>야간 포장이사는 물론, 원룸 이사나 용달 이사도 야간에 진행할 수 있습니다. 짐이 적은 원룸 이사는 야간에 비교적 단시간에 끝낼 수 있어 비용 절감 효과가 있습니다. 다만, 야간 인력 수급이 주간보다 어려울 수 있으므로 업체에 미리 문의하여 가능 여부를 확인해야 합니다.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>업체 선택 시 야간이사 전문업체를 선택해야 하나요?</h3>
+          <p>야간이사는 주간 이사와 달리 작업 환경이 까다롭고, 인력 운영 방식이 다릅니다. 야간 작업 경험이 풍부한 전문업체를 선택해야 야간 할증 요금 산정 기준이 명확하고, 소음 발생이나 안전 문제에 대비하여 숙련된 노하우를 기대할 수 있습니다. 포장이사 업체나 용달 업체를 선택할 때 야간 작업 경험과 후기를 확인하는 것이 중요합니다.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>야간이사의 보험 및 피해보상 절차는 주간과 동일한가요?</h3>
+          <p>네, 동일합니다. 이사 도중 발생하는 물품 파손이나 손해에 대해 보상을 받기 위해서는 반드시 이사 화물 배상책임보험에 가입된 정식 업체를 이용해야 합니다. 계약 시 보험 가입 여부와 보상 범위를 꼼꼼히 확인하고, 계약서에 명시하는 것이 중요합니다. 야간 작업의 특성상 파손 위험이 미세하게 높을 수 있으므로 더욱 철저한 대비가 필요합니다.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>야간 이사 당일, 고객이 준비해야 할 특별한 사항이 있나요?</h3>
+          <p>야간에는 시야 확보가 어렵습니다. 이사 당일 아파트 엘리베이터 주변이나 복도에 조명을 미리 밝히거나 휴대용 조명을 준비하는 것이 좋습니다. 또한 이사하는 집 근처 편의점이나 식당이 문을 닫는 경우가 많으므로 작업자들을 위한 간단한 간식이나 음료수를 미리 준비해 두는 것도 원활한 작업을 돕습니다.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="container">
+        <h2>신뢰할 수 있는 외부 자료 및 참고 링크</h2>
+        <p>현명한 이사 결정을 위해 관련 법규 및 공신력 있는 기관의 자료를 참고하세요.</p>
+        <ul>
+          <li><a href="https://www.gov.kr/portal/lawService.do?menuId=2&query=%EC%9D%B4%EC%82%AC" target="_blank" rel="noopener">정부 민원포털 - 이사 관련 신고 및 정보</a></li>
+          <li><a href="https://www.sbiz.or.kr/site/sbiz/ex/biztype/biztypeView.do?DT_IDX=123" target="_blank" rel="noopener">대한민국 소상공인 사업 유형 안내 - 이사 서비스</a></li>
+          <li><a href="https://ko.wikipedia.org/wiki/%EC%9D%B4%EC%82%AC" target="_blank" rel="noopener">이사 - 위키백과</a></li>
+          <li><a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%ED%95%B4%EC%99%B8%EC%9D%B4%EC%A3%BC%EB%B2%95" target="_blank" rel="noopener">「해외 이주법」 등 이사 관련 법규 (국가법령정보센터)</a></li>
+          <li><a href="https://www.kconsumer.go.kr/kca_cmmn/search/searchList.do" target="_blank" rel="noopener">한국소비자원 - 이사 서비스 관련 피해 사례 및 구제 방법</a></li>
+        </ul>
+        <p>위 자료들은 이삿짐센터 선택 시 법적 기준, 소비자 권리, 서비스 내용 비교 등에 유용한 정보입니다. 특히 야간이사는 주간 이사와 다른 고려 사항이 많으므로, 관련 규정을 숙지하는 것이 중요합니다.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p><strong>야간이사 전문가이드</strong> &copy; 2026 All Rights Reserved.</p>
+      <p>
+        <a href="#">개인정보처리방침</a>
+        <a href="#">이용약관</a>
+        <a href="#">문의하기</a>
+      </p>
+      <p>본 사이트는 전국 야간이사 업체 비교 정보를 제공하며, 실제 계약은 선택하신 업체와 직접 진행됩니다.</p>
+    </div>
+  </footer>
+
+  <script>
+    // FAQ 토글 기능
+    document.querySelectorAll('.faq-item h3').forEach(item => {
+      item.addEventListener('click', event => {
+        const parent = item.parentElement;
+        parent.classList.toggle('active');
+      });
+    });
+  </script>
+
+
+  
